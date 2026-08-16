@@ -43,6 +43,14 @@ A hands-on guide and glossary that assumes nothing, re-explains every technical 
 
 **`git status` never hurts, `q` quits, Ctrl+C cancels, and committed work is almost never truly lost.** Commit small and often — every save point is a place future-you can reload. The rest is looking things up, which is not cheating; it's the job.
 
+## Pairs well with
+
+Learning Git to make games? [**Six Small Worlds**](https://github.com/esorhizome/six-small-worlds) is a companion classroom repo of small game tutorials — a good place to practice the loop you learn here on real projects.
+
+## License
+
+[CC0 1.0 (public domain)](LICENSE) — this is all common knowledge about free tools, so it belongs to everyone. Copy it, translate it, hand it to your students, remix it into your own course materials. No permission or credit needed (though a link back is always appreciated).
+
 ---
 
 *Maintenance note: [FULL-GUIDE.md](FULL-GUIDE.md) is generated from the files in `parts/` — edit those, then run `bash build.sh` to rebuild it.*
