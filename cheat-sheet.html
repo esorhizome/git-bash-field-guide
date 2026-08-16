@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git Bash — printable cheat sheet</title>
+<style>
+  :root{
+    --ink:#2b2740; --muted:#6a6584; --accent:#5b5bd6; --line:#d9d6e8;
+    --panel:#f4f3fa; --warn:#8a4a00; --warnbg:#fff3e2; --code:#efeef7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font:13px/1.45 "Segoe UI", system-ui, sans-serif; color:var(--ink);
+    background:#fff; max-width:960px; margin:0 auto; padding:24px;
+  }
+  header{border-bottom:3px solid var(--accent); padding-bottom:8px; margin-bottom:14px;}
+  h1{font-size:21px;}
+  header p{color:var(--muted); font-size:12px; margin-top:2px;}
+  .cols{column-count:2; column-gap:22px;}
+  section{break-inside:avoid; margin-bottom:14px;}
+  h2{
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent); border-bottom:1px solid var(--line);
+    padding-bottom:3px; margin-bottom:6px;
+  }
+  table{width:100%; border-collapse:collapse;}
+  td{vertical-align:top; padding:2.5px 6px 2.5px 0; border-bottom:1px dotted var(--line);}
+  tr:last-child td{border-bottom:none;}
+  td:first-child{white-space:nowrap; width:46%;}
+  code{
+    font:11.5px/1.4 Consolas, "Cascadia Mono", monospace;
+    background:var(--code); padding:1px 4px; border-radius:3px;
+  }
+  .keys code{background:var(--accent); color:#fff;}
+  .warn{color:var(--warn); font-weight:600;}
+  .note{
+    background:var(--warnbg); border-left:3px solid var(--warn);
+    padding:6px 8px; font-size:12px; border-radius:0 4px 4px 0;
+  }
+  .panel{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    padding:7px 9px; font-size:12px;
+  }
+  .oneline{
+    margin-top:14px; text-align:center; font-size:13px; border-top:3px solid var(--accent);
+    padding-top:8px; color:var(--ink);
+  }
+  .oneline strong{color:var(--accent);}
+  footer{margin-top:6px; text-align:center; color:var(--muted); font-size:11px;}
+  @media print{
+    body{padding:0; max-width:none; font-size:11.5px;}
+    code{font-size:10.5px;}
+    a{color:inherit; text-decoration:none;}
+    @page{size:A4; margin:12mm;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Git Bash — cheat sheet</h1>
+  <p>Looking things up is the skill, not cheating. Commit = save point &nbsp;·&nbsp; branch = parallel timeline &nbsp;·&nbsp; push/pull = upload/download save points.</p>
+</header>
+
+<div class="cols">
+
+<section class="keys">
+  <h2>🚨 Panic keys — when stuck, start here</h2>
+  <table>
+    <tr><td><code>Ctrl+C</code></td><td>Cancel; get the <code>$</code> back (NOT “copy” here)</td></tr>
+    <tr><td><code>q</code></td><td>Leave a scrolling view showing <code>:</code> or <code>(END)</code></td></tr>
+    <tr><td><code>Esc</code> <code>:q!</code> <code>Enter</code></td><td>Escape the Vim editor, saving nothing</td></tr>
+    <tr><td><code>↑</code> / <code>Tab</code></td><td>Replay last command / autocomplete a name</td></tr>
+    <tr><td><code>git status</code></td><td>Always safe — run it and read it</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>👀 Safe anytime — look, never change</h2>
+  <div class="panel"><code>pwd</code> <code>ls</code> <code>git status</code> <code>git log</code> <code>git diff</code> <code>git branch</code> <code>git remote -v</code></div>
+</section>
+
+<section>
+  <h2>🧭 Getting around (Bash)</h2>
+  <table>
+    <tr><td><code>pwd</code></td><td>Where am I?</td></tr>
+    <tr><td><code>ls</code> / <code>ls -a</code></td><td>What’s in here? (<code>-a</code>: + hidden files)</td></tr>
+    <tr><td><code>cd folder</code> / <code>cd ..</code></td><td>Enter folder / go up one level</td></tr>
+    <tr><td><code>cd ~</code> / <code>cd -</code></td><td>Go home / go back where I just was</td></tr>
+    <tr><td><code>mkdir name</code> / <code>touch name</code></td><td>Make a folder / an empty file</td></tr>
+    <tr><td><code>cat file</code></td><td>Show a file’s contents</td></tr>
+    <tr><td><code>cp a b</code> / <code>mv a b</code></td><td>Copy / move-or-rename</td></tr>
+    <tr><td><code>rm file</code> <span class="warn">⚠️</span></td><td>Delete — permanent, no Recycle Bin</td></tr>
+    <tr><td><code>explorer .</code></td><td>Open this folder in File Explorer</td></tr>
+    <tr><td><code>clear</code></td><td>Clean the screen (cosmetic only)</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>🔁 The everyday loop</h2>
+  <table>
+    <tr><td><code>git init</code></td><td>Start watching this folder (once per project)</td></tr>
+    <tr><td><code>git status</code></td><td>What do you see, Git? (always safe)</td></tr>
+    <tr><td><code>git add file</code> / <code>git add .</code></td><td>Box this change / everything, for next save point</td></tr>
+    <tr><td><code>git commit -m "caption"</code></td><td>Save point!</td></tr>
+    <tr><td><code>git diff</code> (<code>--staged</code>)</td><td>Show unsaved edits (or what’s boxed)</td></tr>
+    <tr><td><code>git log --oneline</code></td><td>List all save points (<code>q</code> quits)</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>🌿 Branches (parallel timelines)</h2>
+  <table>
+    <tr><td><code>git branch</code></td><td>List timelines (<code>*</code> = you are here)</td></tr>
+    <tr><td><code>git switch -c name</code></td><td>New timeline + go there</td></tr>
+    <tr><td><code>git switch name</code></td><td>Move to a timeline</td></tr>
+    <tr><td><code>git merge name</code></td><td>Fold that timeline into this one</td></tr>
+    <tr><td><code>git branch -d name</code></td><td>Delete a merged timeline</td></tr>
+    <tr><td><code>git merge --abort</code></td><td>Eject from a conflicted merge</td></tr>
+    <tr><td><code>git log --oneline --graph --all</code></td><td>Draw the timeline map</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>☁️ Online (GitHub)</h2>
+  <table>
+    <tr><td><code>git clone URL</code></td><td>Download a whole project, first time</td></tr>
+    <tr><td><code>git push</code></td><td>Upload my new save points</td></tr>
+    <tr><td><code>git pull</code></td><td>Download + blend in everyone else’s</td></tr>
+    <tr><td><code>git push -u origin main</code></td><td>First-ever push: upload + remember pairing</td></tr>
+    <tr><td><code>git fetch</code></td><td>Check what’s new; change nothing</td></tr>
+  </table>
+  <p style="font-size:11.5px;color:var(--muted);margin-top:4px;">Team habit: <strong>pull before you start, every session.</strong></p>
+</section>
+
+<section>
+  <h2>🛟 Undo &amp; rescue</h2>
+  <table>
+    <tr><td><code>git restore file</code> <span class="warn">⚠️</span></td><td>Discard my edits; back to last save (gone for real)</td></tr>
+    <tr><td><code>git restore --staged file</code></td><td>Un-box it; edits untouched (safe)</td></tr>
+    <tr><td><code>git commit --amend -m "..."</code></td><td>Fix last caption (only if not pushed)</td></tr>
+    <tr><td><code>git stash</code> / <code>git stash pop</code></td><td>Drawer half-done work / take it back out</td></tr>
+    <tr><td><code>git revert ID</code></td><td>Safe undo: new save point cancelling an old one</td></tr>
+    <tr><td><code>git reset --hard ID</code> <span class="warn">⚠️⚠️</span></td><td>Erase history back to a save point — destroys work</td></tr>
+    <tr><td><code>git reflog</code></td><td>Diary of everywhere I’ve been; finds “lost” commits</td></tr>
+  </table>
+  <p class="note" style="margin-top:5px;">Panicking? Stop. Run <code>git status</code>. Read it. Copy the project folder in File Explorer as a raw backup — then nothing can get worse.</p>
+</section>
+
+<section>
+  <h2>🎮 Game dev extras</h2>
+  <table>
+    <tr><td><code>git lfs install</code></td><td>Turn on Large File Storage (once per machine)</td></tr>
+    <tr><td><code>git lfs track "*.psd"</code></td><td>Route file type through LFS (commit <code>.gitattributes</code>)</td></tr>
+    <tr><td><code>git rm -r --cached folder/</code></td><td>Stop tracking committed junk (stays on disk)</td></tr>
+    <tr><td><code>git tag v0.3</code> + <code>git push --tags</code></td><td>Name this save point (e.g. playtest build)</td></tr>
+  </table>
+  <div class="panel" style="margin-top:5px;">
+    <strong>Commit what you create; ignore what the engine generates.</strong><br>
+    <strong>Unity:</strong> keep <code>Assets/ Packages/ ProjectSettings/</code> + all <code>.meta</code>; ignore <code>Library/</code><br>
+    <strong>Unreal:</strong> keep <code>Content/ Config/ Source/ *.uproject</code>; ignore <code>Binaries/ Intermediate/ Saved/ DerivedDataCache/</code>; LFS for <code>.uasset .umap</code><br>
+    <strong>Godot:</strong> keep scenes, scripts, <code>project.godot</code>; ignore <code>.godot/</code> (v4) / <code>.import/</code> (v3)<br>
+    <strong>Everyone:</strong> one person per binary scene/asset at a time — binaries can’t be merged.
+  </div>
+</section>
+
+</div>
+
+<p class="oneline">The whole of Git in one line: <strong>edit → add → commit → push</strong> · pull to get everyone else’s saves.</p>
+<footer>Git Bash Field Guide · committed work is almost never truly lost · print me (Ctrl+P) and keep me by the keyboard</footer>
+</body>
+</html>
